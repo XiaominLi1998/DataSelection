@@ -49,7 +49,6 @@ class LLMTextGeneration:
                             <|start_header_id|>system<|end_header_id|>{{ system_prompt }}<|eot_id|>
                             <|start_header_id|>user<|end_header_id|>{{ user_message }}<|eot_id|>
                             <|start_header_id|>assistant<|end_header_id|>
-        XM note: if large amount of inference is needed in the future, change this to the inference using SFTTrainer instead of pipeline (similar to module_classification)
         '''
         pipeline = transformers.pipeline(
                 "text-generation",
@@ -66,12 +65,9 @@ class LLMTextGeneration:
         prompts = [self.formatting_func_inference(question) for question in questions]
         results = pipeline(
             prompts,
-            do_sample=False, #XM: add randomness (the response less deterministic)
-            # temperature=0.0, XM: Introduces some randomness into the generation. A lower value like 0.7 makes the model output more focused and deterministic compared to the default 1.0.
-            # top_p=0.0,
-            # top_k=1, # XM: model will only consider k most likely next token at each step
-            num_return_sequences=1, # XM: number of responses to this query
-            return_full_text=False, # XM: if not, the returned text will include prompt at the beginning: <prompt>.\n Comment: <response>
+            do_sample=False, 
+            num_return_sequences=1,
+            return_full_text=False,
             eos_token_id=terminators,
             # max_length=self.tokenizer_max_length,
             # truncation=True,
@@ -191,7 +187,6 @@ class LLMTextGeneration:
                 eval_dataset=valid_data,
                 max_seq_length=self.tokenizer_max_length, # default 1024, we specify expected maximum sequence
                 tokenizer=self.tokenizer,
-                # XM: packing: how the dataset inputs are handled. If packing=False, must 1. specify  the field in dataset containing text data (dataset_text_field) or 2. providing a function that formats the data (formatting_func).
                 packing=False,
                 # formatting_func=lambda x: self.formatting_func(x),
                 dataset_text_field="text",
@@ -204,7 +199,6 @@ class LLMTextGeneration:
                 train_dataset=train_data,
                 max_seq_length=self.tokenizer_max_length, # default 1024, we specify expected maximum sequence
                 tokenizer=self.tokenizer,
-                # XM: packing: how the dataset inputs are handled. If packing=False, must 1. specify  the field in dataset containing text data (dataset_text_field) or 2. providing a function that formats the data (formatting_func).
                 packing=False,
                 # formatting_func=lambda x: self.formatting_func(x),
                 dataset_text_field="text",

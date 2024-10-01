@@ -22,7 +22,7 @@ def free_memory():
 
 def model_memory(model, dtype_str):
     dtype_bytes_map = {'float16': 2, 'float32': 4, 'bfloat16': 2}
-    total_memory_bytes = sum(p.numel() for p in model.parameters()) * dtype_bytes_map[dtype_str]  # XM: 2 bytes for float16, 4 bytes for float32, etc
+    total_memory_bytes = sum(p.numel() for p in model.parameters()) * dtype_bytes_map[dtype_str] 
     total_memory_gb = total_memory_bytes / (1024 ** 3)  # Convert to gugabytes
     print(f"Approximate memory usage (GB): {total_memory_gb:.2f} G")
 
@@ -98,6 +98,3 @@ def data_info(tokenizer, train_dataset, valid_dataset=None, test_dataset=None):
     token_lengths = [len(tokenizer.encode(text)) for text in train_dataset['text'][:count]]
     print(f"Token Length (first {count} examples from train_dataset): Max = {np.max(token_lengths)}. Average = {np.mean(token_lengths)}. Median = {np.median(token_lengths)}. 90thPercentile = {np.percentile(token_lengths, 90)}")
 
-def add_path_prefix(path_name):
-    MODEL_PATH_PREFIX = "/n/holyscratch01/lu_lab/Users/xiaominli/models/huggingface"
-    return os.path.join(MODEL_PATH_PREFIX, path_name) if len(MODEL_PATH_PREFIX) > 0 else path_name
