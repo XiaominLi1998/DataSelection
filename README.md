@@ -1,6 +1,6 @@
 # Pipeline for Rule Generation and Data Selection
 
-This repository provides the necessary code for running a pipeline that includes generating rules, rating data, selecting rules, and sampling data. Note that while only the Math domain is included as an example, the procedure and code for other domains follow the same structure.
+This repository provides the necessary code for running a pipeline that includes generating rules, rating data, selecting rules, and sampling data. Note that we use the Math domain as an example in the illustrations below, but the procedure and code for other domains follow the same structure.
 
 ## Download Data
 Download the SlimPajama-6B data from Hugging Face at the repository [DKYoon/SlimPajama-6B](https://huggingface.co/datasets/DKYoon/SlimPajama-6B) and save the first 1M samples.
