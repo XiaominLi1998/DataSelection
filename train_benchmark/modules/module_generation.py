@@ -89,7 +89,6 @@ class LLMTextGeneration:
                             <|start_header_id|>system<|end_header_id|>{{ system_prompt }}<|eot_id|>
                             <|start_header_id|>user<|end_header_id|>{{ user_message }}<|eot_id|>
                             <|start_header_id|>assistant<|end_header_id|>
-        XM note: if large amount of inference is needed in the future, change this to the inference using SFTTrainer instead of pipeline (similar to module_classification)
         '''
         pipeline = transformers.pipeline(
             "text-generation",
