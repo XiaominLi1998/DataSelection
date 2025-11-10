@@ -1,5 +1,7 @@
 # Pipeline for Rule Generation and Data Selection
 
+🎉 **Our paper has been accepted to [AAAI 2026]!**
+
 This repository provides the necessary code for running a pipeline that includes generating rules, rating data, selecting rules, and sampling data. Note that we use the Math domain as an example in the illustrations below, but the procedure and code for other domains follow the same structure.
 
 ## Download Data
